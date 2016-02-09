@@ -29,13 +29,11 @@ stages:
 # We test PHP5.6 (the default) with MySQL
 test:PHP5.6:MySQL:
   script:
-  - bash bin/install-wp-tests-gitlab.sh wordpress_tests root mysql mysql latest
-  - find . \( -name '*.php' \) -exec php -lf {} \;
+  - bash bin/install-wp-tests-gitlab.sh wordpress_tests root mysql mysql latest  
   - phpunit --configuration phpunit.xml.dist
 
 test:PHP7:MySQL:
   image: php:7
   script:
   - bash bin/install-wp-tests-gitlab.sh wordpress_tests root mysql mysql latest
-  - find . \( -name '*.php' \) -exec php -lf {} \;
   - phpunit --configuration phpunit.xml.dist
