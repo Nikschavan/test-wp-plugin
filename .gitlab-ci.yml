@@ -1,39 +1,33 @@
 image: php:5.6
-services:
-  - mysql
 
 variables:
   # Configure mysql service (https://hub.docker.com/_/mysql/)
   MYSQL_DATABASE: wordpress_tests
   MYSQL_ROOT_PASSWORD: mysql
 
+before_script:
+  # Install dependencies
+  - bash bin/install_gitlab_tests.sh wordpress_tests root mysql mysql latest
 
 stages:
   - test
 
-# did not figure out yet which PHP images to be used for PHP 5.4 and PHP 5.3
 # test:PHP5.3:MySQL:
 #   image: tetraweb/php:5.3
 #   script:
-#   - bash bin/install_gitlab_tests.sh wordpress_tests root mysql mysql latest
-#   - find . \( -name '*.php' \) -exec php -lf {} \;
 #   - phpunit --configuration phpunit.xml.dist
 
-# test:PHP5.4:MySQL:
-#   image: tetraweb/php:5.4
-#   script:
-#   - bash bin/install_gitlab_tests.sh wordpress_tests root mysql mysql latest
-#   - find . \( -name '*.php' \) -exec php -lf {} \;
-#   - phpunit --configuration phpunit.xml.dist
-
-# We test PHP5.6 (the default) with MySQL
-test:PHP5.6:MySQL:
+test:PHP5.4:MySQL:
+  image: tetraweb/php:5.4
   script:
-  - bash bin/install-wp-tests-gitlab.sh wordpress_tests root mysql mysql latest  
+  - phpunit --configuration phpunit.xml.dist
+
+test:PHP5.6:MySQL:
+  image: php:5.6
+  script:
   - phpunit --configuration phpunit.xml.dist
 
 test:PHP7:MySQL:
   image: php:7
-  script:
-  - bash bin/install-wp-tests-gitlab.sh wordpress_tests root mysql mysql latest
+  script:  
   - phpunit --configuration phpunit.xml.dist
