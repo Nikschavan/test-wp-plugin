@@ -112,6 +112,7 @@ install_gitlab_test_runner() {
 
 	# Install mysql driver
 	docker-php-ext-install mysqli	
+	docker-php-ext-install pdo pdo_mysql
 }
 
 install_gitlab_test_runner
