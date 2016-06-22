@@ -103,11 +103,7 @@ install_gitlab_test_runner() {
 
 	set -xe
 
-	# Remove contents of /var/lib/apt/lists to fix "Hash sum mismatch" error
-	# rm -rf /var/lib/apt/lists/*
-
 	apt-get -yqq update
-	# apt-get -yqq --fix-missing upgrade
 
 	# instll the required packages for the running CI tests
 	apt-get -yqq install git zip unzip subversion libapache2-svn

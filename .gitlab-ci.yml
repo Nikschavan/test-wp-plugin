@@ -12,15 +12,19 @@ before_script:
 stages:
   - test
 
-# test:PHP5.3:MySQL:
-#   image: tetraweb/php:5.3
-#   script:
-#   - phpunit --configuration phpunit.xml.dist
+test:PHP5.3:MySQL:
+  image: tetraweb/php:5.3
+  services:
+    - mysql:5.6
+  script:
+  - phpunit --configuration phpunit.xml.dist
 
-# test:PHP5.4:MySQL:
-#   image: tetraweb/php:5.4
-#   script:
-#   - phpunit --configuration phpunit.xml.dist
+test:PHP5.4:MySQL:
+  image: tetraweb/php:5.4
+  services:
+    - mysql:5.6
+  script:
+  - phpunit --configuration phpunit.xml.dist
 
 test:PHP5.6:MySQL:
   image: php:5.6
@@ -29,7 +33,9 @@ test:PHP5.6:MySQL:
   script:
   - phpunit --configuration phpunit.xml.dist
 
-# test:PHP7:MySQL:
-#   image: php:7
-#   script:  
-#   - phpunit --configuration phpunit.xml.dist
+test:PHP7:MySQL:
+  image: php:7
+  services:
+    - mysql:5.6
+  script:  
+  - phpunit --configuration phpunit.xml.dist
