@@ -17,15 +17,15 @@ stages:
 #   script:
 #   - phpunit --configuration phpunit.xml.dist
 
-test:PHP5.4:MySQL:
-  image: tetraweb/php:5.4
-  script:
-  - phpunit --configuration phpunit.xml.dist
-
-# test:PHP5.6:MySQL:
-#   image: php:5.6
+# test:PHP5.4:MySQL:
+#   image: tetraweb/php:5.4
 #   script:
 #   - phpunit --configuration phpunit.xml.dist
+
+test:PHP5.6:MySQL:
+  image: php:5.6
+  script:
+  - phpunit --configuration phpunit.xml.dist
 
 # test:PHP7:MySQL:
 #   image: php:7
