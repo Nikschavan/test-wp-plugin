@@ -111,11 +111,13 @@ install_gitlab_test_runner() {
 
 	# instll the required packages for the running CI tests
 	apt-get -yqq install git zip unzip subversion libapache2-svn
-	apt-get install -y phpunit php5-mysql mysql-client libmysqlclient-dev
+	apt-get install -y phpunit php5-mysql mysql-server mysql-client libmysqlclient-dev
 
 	# Install mysql driver
 	docker-php-ext-install mysqli	
 	docker-php-ext-install pdo pdo_mysql
+
+	service mysql status
 }
 
 install_gitlab_test_runner
