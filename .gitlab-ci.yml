@@ -34,9 +34,9 @@ before_script:
 #   - phpunit --configuration phpunit.xml.dist
 
 PHPunit:PHP5.6:MySQL:
-  # image: tetraweb/php:5.6
-  # services:
-    # - mysql:5.6
+  image: tetraweb/php:5.6
+  services:
+    - mysql:5.6
   script:
   - phpunit --configuration phpunit.xml.dist
 
