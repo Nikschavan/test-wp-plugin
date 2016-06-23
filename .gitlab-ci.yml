@@ -6,9 +6,9 @@ variables:
 before_script:
   # Install dependencies
   - bash bin/install_gitlab_tests.sh wordpress_tests root mysql mysql latest
-  - composer install --no-interaction
-  - composer --version
-  - composer selfupdate
+  # - composer install --no-interaction
+  # - composer --version
+  # - composer selfupdate
 
 PHPunit:PHP5.3:MySQL:
   image: tetraweb/php:5.3
