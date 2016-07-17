@@ -5,27 +5,22 @@ variables:
 
 before_script:
   # Install dependencies
-  - bash bin/install_gitlab_tests.sh wordpress_tests root mysql mysql latest
-  # - composer install --no-interaction
-  # - composer --version
-  # - composer selfupdate
+  
+  # update the docker
+  - apt-get clean
+  - apt-get -yqq update
+
+  # instll the required packages for the running CI tests
+  - apt-get -yqqf install zip unzip subversion mysql-client libmysqlclient-dev --fix-missing
+
+  # PHP extensions
+  - docker-php-ext-enable mbstring mcrypt mysqli pdo_mysql intl gd zip bz2
+
+  # Set up WordPress tests
+  - bash bin/install-wp-tests.sh wordpress_tests root mysql mysql latest true
 
 PHPunit:PHP5.3:MySQL:
   image: tetraweb/php:5.3
-  services:
-    - mysql:5.6
-  script:
-  - phpunit --configuration phpunit.xml.dist
-
-PHPunit:PHP5.4:MySQL:
-  image: tetraweb/php:5.4
-  services:
-    - mysql:5.6
-  script:
-  - phpunit --configuration phpunit.xml.dist
-
-PHPunit:PHP5.5:MySQL:
-  image: tetraweb/php:5.5
   services:
     - mysql:5.6
   script:
@@ -36,11 +31,4 @@ PHPunit:PHP5.6:MySQL:
   services:
     - mysql:5.6
   script:
-  - phpunit --configuration phpunit.xml.dist
-
-PHPunit:PHP7.0:MySQL:
-  image: tetraweb/php:7.0
-  services:
-    - mysql:5.6
-  script:  
   - phpunit --configuration phpunit.xml.dist
